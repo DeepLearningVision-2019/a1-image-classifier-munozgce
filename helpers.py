@@ -34,11 +34,11 @@ def load_dataset(image_dir):
 ## Standardize the input images
 # Resize each image to the desired input size: 600x1100px (hxw).
 # This function should take in an RGB image and return a new, standardized version
-def standardize_input(image, width, height):
+def standardize_input(image, width=1100, height=600):
     
     # Resize image and pre-process so that all "standard" images are the same size
     # cv2.resize
-    standard_im = none
+    standard_im = cv2.resize(image, (width, height))
     
     return standard_im
 
@@ -47,11 +47,13 @@ def standardize_input(image, width, height):
 # Examples: 
 # encode("day") should return: 1
 # encode("night") should return: 0
+encoding = {"day":1, "night":0}
 def encode(label):
         
-    numerical_val = 0
+    #numerical_val = 0
     
-    return numerical_val
+    #return numerical_val
+    return encoding[label]
 
 
 ## Standardize the output using both functions above, standardize the input images and output labels
@@ -64,6 +66,7 @@ def standardize(image_list):
     for item in image_list:
         
         # Standardize the image
+        standard_list.append(( standardize_input(item[0]),encode(item[1])))
         
         # Create a numerical label
         
